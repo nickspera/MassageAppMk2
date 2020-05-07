@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, Picker, Button } from 'react-native';
+import { Text, View, ScrollView, StyleSheet,
+    Picker, Button, Modal } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
 class Schedule extends Component {
@@ -9,7 +10,8 @@ class Schedule extends Component {
 
         this.state = {
             service: 'Massage',
-            date: ''
+            date: '',
+            showModal: false
         }
     }
 
@@ -17,11 +19,20 @@ class Schedule extends Component {
         title: 'Reserve Appointment'
     }
 
+    toggleModal() {
+        this.setState({showModal: !this.state.showModal})
+    }
+
     handleSchedule() {
         console.log(JSON.stringify(this.state));
+        this.toggleModal();
+    }
+
+    resetForm() {
         this.setState({
             service: 'Massage',
-            date: ''
+            date: '',
+            showModal: false
         });
     }
 
@@ -72,6 +83,25 @@ class Schedule extends Component {
                         accessibilityLabel='Tap me to search for available campsites to reserve'
                     />
                 </View>
+                <Modal
+                    animationType={'slide'}
+                    transparent={false}
+                    visible={this.state.showModal}
+                    onRequestClose={() => this.toggleModal()}>
+                    <View style={styles.modal}>
+                        <Text style={styles.modalTitle}>You're Scheduled!</Text>
+                        <Text style={styles.modalText}>Service: {this.state.service}</Text>
+                        <Text style={styles.modalText}>Date: {this.state.date} </Text>
+                        <Button
+                            onPress={() => {
+                                this.toggleModal();
+                                this.resetForm();
+                            }}
+                            color='#05668D'
+                            title='Close'
+                        />
+                    </View>
+                </Modal>
             </ScrollView>
         )
     }
@@ -91,6 +121,22 @@ const styles = StyleSheet.create({
     },
     formItem: {
         flex: 1
+    },
+    modal: {
+        justifyContent: 'center',
+        margin: 20,
+    },
+    modalTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        backgroundColor: '#05668D',
+        textAlign: 'center' ,
+        color: '#FFF',
+        marginBottom: 20,
+    },
+    modalText: {
+        fontSize: 18,
+        margin: 10
     }
 });
 
