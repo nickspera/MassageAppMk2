@@ -4,6 +4,7 @@ import Bodywork from './BodyworkComponent';
 import ServiceInfo from './ServiceInfoComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
+import Schedule from './ScheduleComponent';
 import { View, Platform, StyleSheet, Text, ScrollView, Image } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -117,6 +118,30 @@ const ContactNavigator = createStackNavigator(
     }
 );
 
+const ScheduleNavigator = createStackNavigator(
+    {
+        Schedule: { screen: Schedule }
+    },
+    {
+        //initialRouteName: 'Schedule',
+        navigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: '#05668D'
+            },
+            headerTintColor: '#FFF',
+            headerTitleStyle: {
+                color: '#FFF'
+            },
+            headerLeft: <Icon
+                name='calendar'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
+    }
+);
+
 const CustomDrawerContentComponent = props => (
     <ScrollView>
         <SafeAreaView
@@ -156,6 +181,20 @@ const MainNavigator = createDrawerNavigator(
                 drawerIcon: ({tintColor}) => (
                     <Icon
                         name='list'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+        },
+        Schedule: {
+            screen: ScheduleNavigator,
+            navigationOptions: {
+                drawerLabel: 'Schedule Appointment',
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='calendar'
                         type='font-awesome'
                         size={24}
                         color={tintColor}
