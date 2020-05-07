@@ -3,6 +3,7 @@ export const ADD_SERVICES = 'ADD_SERVICES';
 export const SERVICES_FAILED = 'SERVICES_FAILED';
 
 export const ADD_REVIEWS = 'ADD_REVIEWS';
+export const ADD_REVIEW = 'ADD_REVIEW';
 export const REVIEWS_FAILED = 'REVIEWS_FAILED';
 
 export const PROMOTIONS_LOADING = 'PROMOTIONS_LOADING';

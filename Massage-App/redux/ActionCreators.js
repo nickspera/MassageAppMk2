@@ -104,3 +104,30 @@ export const addPromotions = promotions => ({
     type: ActionTypes.ADD_PROMOTIONS,
     payload: promotions
 });
+
+export const postReview = (serviceId, rating, author, text) => dispatch => {
+    const newReview = {
+        serviceId: serviceId,
+        rating: rating,
+        author: author,
+        text: text,
+    };
+    newReview.date = new Date().toISOString();
+
+    setTimeout (() => {
+        dispatch(addReview(newReview))
+        }, 2000);
+ 
+    return fetch(baseUrl + 'reviews', {
+        method: "POST",
+        body: JSON.stringify(newReview),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+};
+
+export const addReview = newReview => ({
+    type: ActionTypes.ADD_REVIEW,
+    payload: newReview
+});
