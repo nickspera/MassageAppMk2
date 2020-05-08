@@ -30,16 +30,17 @@ function RenderService(props) {
                 </Text>
                 
                 <View style={styles.cardRow}>
-                        <Icon
-                            name={'pencil'}
-                            type='font-awesome'
-                            color='#5637DD'
-                            raised
-                            reverse
-                            onPress={() => props.onShowModal()}
-                            style={styles.cardItem}
-                        />
-                    </View>
+                    <Text>Leave a review!</Text>
+                    <Icon
+                        name={'pencil'}
+                        type='font-awesome'
+                        color='#5637DD'
+                        raised
+                        reverse
+                        onPress={() => props.onShowModal()}
+                        style={styles.cardItem}
+                    />
+                </View>
             </Card>
         );
     }

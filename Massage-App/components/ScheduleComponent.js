@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet,
     Picker, Button, Modal } from 'react-native';
+import { Input } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 
 class Schedule extends Component {
@@ -11,12 +12,14 @@ class Schedule extends Component {
         this.state = {
             service: 'Massage',
             date: '',
+            name: '',
+            email: '',
             showModal: false
         }
     }
 
     static navigationOptions = {
-        title: 'Reserve Appointment'
+        title: 'Schedule an Appointment'
     }
 
     toggleModal() {
@@ -32,6 +35,8 @@ class Schedule extends Component {
         this.setState({
             service: 'Massage',
             date: '',
+            name: '',
+            email: '',
             showModal: false
         });
     }
@@ -76,6 +81,22 @@ class Schedule extends Component {
                     />
                 </View>
                 <View style={styles.formRow}>
+                    <Input
+                        name={this.state.name}
+                        placeholder= 'Your Name'
+                        onChangeText={value => this.setState({name: value})}
+                        value
+                    />
+                </View>
+                <View style={styles.formRow}>
+                    <Input
+                        email={this.state.email}
+                        placeholder= 'Email Address'
+                        onChangeText={value => this.setState({email: value})}
+                        value
+                    />
+                </View>
+                <View style={styles.formRow}>
                     <Button
                         onPress={() => this.handleSchedule()}
                         title='Search'
@@ -92,6 +113,8 @@ class Schedule extends Component {
                         <Text style={styles.modalTitle}>You're Scheduled!</Text>
                         <Text style={styles.modalText}>Service: {this.state.service}</Text>
                         <Text style={styles.modalText}>Date: {this.state.date} </Text>
+                        <Text style={styles.modalText}>Name: {this.state.name} </Text>
+                        <Text style={styles.modalText}>Email: {this.state.email} </Text>
                         <Button
                             onPress={() => {
                                 this.toggleModal();
